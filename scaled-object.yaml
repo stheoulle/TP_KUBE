@@ -1,0 +1,19 @@
+apiVersion: keda.sh/v1alpha1
+kind: ScaledObject
+metadata:
+  name: scaled-object-tp-muller
+  namespace: tp-muller
+spec:
+  scaleTargetRef:
+    name: portfolio-srh
+  minReplicaCount: 1
+  maxReplicaCount: 10
+  triggers:
+    - type: cpu
+      metricType: Utilization
+      metadata:
+        value: "10"
+    - type: memory
+      metricType: Utilization
+      metadata:
+        value: "50" 

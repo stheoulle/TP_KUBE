@@ -1,0 +1,23 @@
+kind: Pod
+apiVersion: v1
+metadata:
+  name: pvc-pod
+  namespace: tp-muller
+spec:
+  containers:
+    - name: frontend
+      image: nginx
+      resources:
+        limits:
+          memory: "128Mi"
+          cpu: "500m"
+        requests:
+          memory: "64Mi"
+          cpu: "250m"
+      volumeMounts:
+      - mountPath: "/var/www/html"
+        name: pvc-demo-volume
+  volumes:
+    - name: pvc-demo-volume
+      persistentVolumeClaim:
+        claimName: pvc-tp-muller
